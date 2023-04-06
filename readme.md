@@ -1,4 +1,4 @@
-# Bangla Medical ChatBot💬 WebApp (Build with Rasa and Flask)
+# Bangla Medical ChatBot💬 WebApp (Developed with Rasa and Flask)
 
 ![image](https://user-images.githubusercontent.com/39009087/230365124-0fe4a80b-3c36-4e17-8fa6-2297d145bd95.svg)
 
