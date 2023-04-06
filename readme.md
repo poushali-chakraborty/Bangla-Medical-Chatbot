@@ -1,6 +1,7 @@
 # Bangla Medical ChatBot💬 WebApp (Build with Rasa and Flask)
 
-[https://camo.githubusercontent.com/38f5db5524ba43e7262dfbca1f7d3631ba127fb1596785dfd707d5fc671821c9/687474703a2f2f466f7254686542616467652e636f6d2f696d616765732f6261646765732f6d6164652d776974682d707974686f6e2e737667](https://camo.githubusercontent.com/38f5db5524ba43e7262dfbca1f7d3631ba127fb1596785dfd707d5fc671821c9/687474703a2f2f466f7254686542616467652e636f6d2f696d616765732f6261646765732f6d6164652d776974682d707974686f6e2e737667)
+![image](https://user-images.githubusercontent.com/39009087/230365124-0fe4a80b-3c36-4e17-8fa6-2297d145bd95.svg)
+
 
 ## Features:
 
@@ -29,16 +30,16 @@
 15. In your browser go to  [http://127.0.0.1:5000](http://127.0.0.1:5000/) and start chatting
 
 ## Screenshots:
+<img width="914" alt="1" src="https://user-images.githubusercontent.com/39009087/230365371-9c2f7ec2-4e6d-4d03-a87f-239d2f7f7bd1.png">
 
-![1.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5885a05f-cbde-40f3-945f-57b5cb9d903d/1.png)
+<img width="915" alt="2" src="https://user-images.githubusercontent.com/39009087/230365386-6d884ec1-a409-4fb1-ac76-3cd11bd89c2e.png">
+<img width="912" alt="3" src="https://user-images.githubusercontent.com/39009087/230365428-a5c5ba7f-d07f-41f4-bd33-b3cc88aa7a9f.png">
 
-![2.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c057ea0e-91c0-4d97-9ea1-882cb498c51b/2.png)
+<img width="913" alt="5" src="https://user-images.githubusercontent.com/39009087/230365453-190188ed-b800-4b1d-9786-fd47ae729592.png">
 
-![3.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/5dca8d8b-03e6-4b9e-8167-a52904c8bac0/3.png)
+<img width="914" alt="6" src="https://user-images.githubusercontent.com/39009087/230365474-b25f0edf-a09c-4b1f-a16d-12e4e9fb573c.png">
 
-![5.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/05693687-28a5-4662-81eb-2ee514e0d75f/5.png)
 
-![6.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c95aa84f-2b91-463c-9614-d8164f33deb5/6.png)
 
 ## Notes:-
 
