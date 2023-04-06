@@ -1,0 +1,117 @@
+version: "3.1"
+
+stories:
+- story: Basic Daignostic
+  steps:
+  - intent: Asking_Query_about_Health
+  - action: utter_Asking_Query_about_Health
+  - intent: Asking_Query_about_Health 
+  - action: utter_health_info
+  - action: bmi_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_bmi
+
+
+- story: High_Blood_Pressure 1
+  steps:
+  - intent: High_Blood_Pressure
+  - action: utter_More
+  - intent: High_Blood_Pressure
+  - action: utter_More
+  - intent: High_Blood_Pressure
+  - action: utter_More
+  - intent: High_Blood_Pressure
+  - action: utter_High_Blood_Pressure
+
+- story: Low_Blood_Pressure
+  steps:
+  - intent: Low_Blood_Pressure
+  - action: utter_More
+  - intent: Low_Blood_Pressure
+  - action: utter_More
+  - intent: Low_Blood_Pressure
+  - action: utter_Low_Blood_Pressure
+- story: Normal_Fever
+  steps:
+  - intent: Normal_Fever
+  - action: utter_More
+  - intent: Normal_Fever
+  - action: utter_More
+  - intent: Normal_Fever
+  - action: utter_Normal_Fever
+- story: Diabetes
+  steps:
+  - intent: Diabetes
+  - action: utter_More
+  - intent: Diabetes
+  - action: utter_More
+  - intent: Diabetes
+  - action: utter_Diabetes
+- story: Allergy
+  steps:
+  - intent: Allergy
+  - action: utter_Allergy
+- story: Pneumonia
+  steps:
+  - intent: Pneumonia
+  - action: utter_More
+  - intent: Pneumonia
+  - action: utter_More
+  - intent: Pneumonia
+  - action: utter_Pneumonia
+- story: Malaria
+  steps:
+  - intent: Malaria
+  - action: utter_More
+  - intent: Malaria
+  - action: utter_More
+  - intent: Malaria
+  - action: utter_Malaria
+- story: Hepatitis_B
+  steps:
+  - intent: Hepatitis_B
+  - action: utter_More
+  - intent: Hepatitis_B
+  - action: utter_More
+  - intent: Hepatitis_B
+  - action: utter_Hepatitis_B
+- story: Dengue
+  steps:
+  - intent: Dengue
+  - action: utter_More
+  - intent: Dengue
+  - action: utter_More
+  - intent: Dengue
+  - action: utter_Dengue
+- story: Tuberculosis
+  steps:
+  - intent: Tuberculosis
+  - action: utter_More
+  - intent: Tuberculosis
+  - action: utter_More
+  - intent: Tuberculosis
+  - action: utter_Tuberculosis
+ 
+
+- story: time show path
+  steps:
+  - intent: show_time
+  - action: action_show_time
+
+- story: utter meaningless expression when the user does
+  steps:
+  - intent: meaningless_expressions
+  - action: utter_meaninglessexpressions
+
+- story: appointment
+  steps:
+  - intent: request_appointment
+  - action: city_name_form
+  - active_loop: city_name_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_appointment
+

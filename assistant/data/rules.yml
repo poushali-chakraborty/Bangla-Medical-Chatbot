@@ -1,0 +1,81 @@
+version: "3.1"
+
+rules:
+
+- rule: For Greetings
+  steps:
+  - intent: Greetings
+  - action: utter_Greetings
+- rule: For CourtesyGreeting
+  steps:
+  - intent: CourtesyGreeting
+  - action: utter_CourtesyGreeting
+
+- rule: For NameQuery
+  steps:
+  - intent: NameQuery
+  - action: utter_NameQuery
+
+- rule: For RealNameQuery
+  steps:
+  - intent: RealNameQuery
+  - action: utter_RealNameQuery
+
+- rule: For Thanks
+  steps:
+  - intent: Thanks
+  - action: utter_Thanks
+
+- rule: For NotTalking2U
+  steps:
+  - intent: NotTalking2U
+  - action: utter_NotTalking2U
+- rule: For Jokes
+  steps:
+  - intent: Jokes
+  - action: utter_Jokes
+- rule: For UnderstandQuery
+  steps:
+  - intent: UnderstandQuery
+  - action: utter_UnderstandQuery
+- rule: For Shutup
+  steps:
+  - intent: Shutup
+  - action: utter_Shutup
+- rule: For GoodBye
+  steps:
+  - intent: GoodBye
+  - action: utter_GoodBye
+- rule: For CourtesyGoodBye
+  steps:
+  - intent: CourtesyGoodBye
+  - action: utter_CourtesyGoodBye
+- rule: For Clever
+  steps:
+  - intent: Clever
+  - action: utter_Clever
+- rule: For Weekness
+  steps:
+  - intent: Weekness
+  - action: utter_More
+
+- rule: Always reply when user asks wellbeing
+  steps:
+  - intent: ask_wellbeing
+  - action: utter_wellbeing
+
+
+- rule: Always reply what the bot is doing when asked
+  steps:
+  - intent: ask_what_bot_doing_now
+  - action: utter_whatbotdoingnow
+
+- rule: Always ask a user to rephrase when they send a message with low nlu confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: Always give the location when the user asks
+  steps:
+  - intent: ask_bot_location
+  - action: utter_location

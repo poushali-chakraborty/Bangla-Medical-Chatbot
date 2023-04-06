@@ -1,0 +1,254 @@
+version: "3.1"
+
+intents:
+  - Greetings
+  - CourtesyGreeting
+  - CurrentHumanQuery
+  - NameQuery
+  - RealNameQuery
+  - Thanks
+  - NotTalking2U
+  - Jokes
+  - UnderstandQuery
+  - Shutup
+  - GoodBye
+  - CourtesyGoodBye
+  - Clever
+  - Asking_Query_about_Health
+  - High_Blood_Pressure
+  - Low_Blood_Pressure
+  - Normal_Fever
+  - Diabetes
+  - Allergy
+  - Pneumonia
+  - Malaria
+  - Hepatitis_B
+  - Dengue
+  - Tuberculosis
+  - Result
+  - Weekness
+  - ask_wellbeing
+  - ask_what_bot_doing_now
+  - ask_bot_location
+  - ask_bmi
+  - request_appointment
+  - meaningless_expressions
+  - provide_city_name
+  - show_time
+  - provide_bmi
+  
+entities:
+  - city
+  - weight
+  - height
+  - sex
+  - age
+  - waist
+  - hip
+slots: 
+  city:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: city
+      conditions:
+          - active_loop: city_name_form
+  weight: 
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: weight
+  height: 
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: height
+  sex: 
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: sex
+  age: 
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: age
+  waist: 
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: waist
+forms:
+  city_name_form:
+    required_slots:
+      - city
+  bmi_form:
+    required_slots:
+      - weight
+      - height
+      - sex
+      - age
+      - waist
+actions:
+  - action_show_time
+  - action_bmi
+  - action_appointment
+responses:
+  utter_Greetings:
+  - text: "হাই  ! আমি কীভাবে সাহায্য করতে পারি?"
+  - text: "হ্যালো, আমি আপনাকে কীভাবে সাহায্য করতে পারি?"
+  - text: "হ্যালো !  আমি আপনার জন্য কী করতে পারি?"
+  - text: "হাই, আমি আপনাকে কীভাবে সাহায্য করতে পারি?"
+  - text: "হাই, আমি আপনার জন্য কী করতে পারি?"
+
+  utter_CourtesyGreeting:
+  - text: "আমি খুব ভালো, আপনি কেমন আছেন? "
+  - text: "হ্যালো, আপনি কেমন আছেন? আমি ভালো "
+  - text: "হ্যালো, আমি ভাল আছি আপনাকে ধন্যবাদ"
+  - text: "হাই, আমি ভাল আছি আপনাকে ধন্যবাদ, কেমন আছেন?"
+  - text: "হাই, ভাল আপনাকে ধন্যবাদ, আপনি কেমন আছেন?"
+  - text: "আমি একটি বট, আমি সব সময় ভালো থাকি। জিঞ্জাসা করার জন্য আপনাকে ধন্যবাদ"
+
+  utter_CurrentHumanQuery:
+  - text: "আপনি %% USER %%! আমি কীভাবে সাহায্য করতে পারি?"
+  - text: "আপনার নাম %% USER %%, আমি আপনাকে কীভাবে সাহায্য করতে পারি?"
+  - text: "আপনি আমাকে বলেছেন আপনার নাম %% USER %%, আমি আপনার জন্য কী করতে পারি?"
+  - text: "আপনার নাম %% USER %%, আমি আপনাকে কীভাবে সাহায্য করতে পারি?"
+  - text: "আপনি %% USER %%, আমি আপনার জন্য কী করতে পারি?"
+
+  utter_NameQuery:
+  - text: "আপনি আমাকে এনিগমা বলতে পারেন"
+  - text: "আপনি আমাকে এনিগমা বলতে পারেন"
+  - text: "আমাকে এনিগমা কল করুন"
+  - text: "অমি এনিগমা । তাই এনিগমাই ডাকুন।"
+
+  utter_RealNameQuery:
+  - text: "আমার নাম এলিজাবেথ এনিগমা "
+  - text: "এলিজাবেথ এনিগমা"
+  - text: "আমার আসল নাম এলিজাবেথ এনিগমা"
+
+ 
+
+  utter_Thanks:
+  - text: "সমস্যা নেই!"
+  - text: "আমি আনন্দিত এবং খুশি!"
+  - text: "আমার আনন্দ"
+  - text: "আপনার সাথে কথা বলে ভালো লাগলো।"
+
+  utter_NotTalking2U:
+  - text: "ঠিক আছে"
+  - text: "সমস্যা নেই"
+  - text: "ঠিক আছে। আমি দুঃখিত।"
+
+  utter_Jokes:
+  - text: "যখন আপনার একা লাগবে, চারদিকে কিছুই দেখতে পাবেন না, দুনিয়া টা ঝাপসা হয়ে আসবে। তখন আমার কাছে আসবেন . . . চোখের ডাক্তার দেখাতে বলব  "
+
+  utter_UnderstandQuery:
+  - text: "বোঝার চেষ্টা করছি"
+  - text: "সত্যি আমি চেষ্টা করছি বোঝার জন্য!"
+  - text: "আরেকটু সহজ সাবলীল ভাবে বলার চেষ্টা করুন"
+
+  utter_Shutup:
+  - text: "আপনাকে বিরক্ত করার জন্য দুঃখিত"
+  - text: "ভাল, আপনাকে বিরক্ত করার জন্য দুঃখিত"
+  - text: "ঠিক আছে, আপনাকে বিরক্ত করার জন্য দুঃখিত"
+
+  utter_GoodBye:
+  - text: "পরে দেখা হবে"
+  - text: "আপনার দিনটি শুভ হোক"
+  - text: "বিদায়! শীঘ্রই আবার দেখা হবে"
+
+  utter_CourtesyGoodBye:
+  - text: "পরে দেখা হবে"
+  - text: "আপনার দিনটি শুভ হোক"
+  - text: "বিদায়! শীঘ্রই আবার দেখা হবে"
+
+  utter_Clever:
+  - text: "আপনাকে ধন্যবাদ, আমি সেভাবে প্রশিক্ষণ পেয়েছি"
+  - text: "আমার ভাল প্রশিক্ষক ছিল"
+  - text: "ধন্যবাদ, আমি সেভাবে প্রশিক্ষণ পেয়েছি"
+
+  utter_Asking_Query_about_Health:
+  - text: "আপনার সমস্যার কথা আমাকে ভেঙ্গে বলুন"
+  - text: "আপনার স্বাস্থ্য সমস্যা সম্পর্কে আমাকে বলুন"
+  - text: "আমি কি জানতে পারি আপনার কী কী সমস্যা?"
+
+  utter_High_Blood_Pressure:
+  - text: "আপনার রক্তচাপ পরীক্ষা করুন। আপনার উচ্চ রক্তচাপ হওয়ার সম্ভবনা বেশি।"
+
+  utter_Low_Blood_Pressure:
+  - text: "আপনার রক্তচাপ পরীক্ষা করুন। আপনার নিন্ম রক্তচাপ হওয়ার সম্ভবনা বেশি।"
+
+  utter_Normal_Fever:
+  - text: "আপনার শরীরের তাপমাত্রা মেপে দেখুন, ১০০ ডিগ্রী থেকে বেশি হলে আপনার জ্বর আছে । "
+
+  utter_Diabetes:
+  - text: "আপনার ডায়াবেটিস হওয়ার সম্ভাবনা আছে। আপনি ডায়াবেটিসের পরীক্ষা  করান। "
+
+  utter_Allergy:
+  - text: "আপনি এলার্জি জনিত সমস্যা দেখা দিয়েছে । "
+
+  utter_Pneumonia:
+  - text: "আপনার নিউমোনিয়াতে আক্রান্ত হওয়ার সম্ভাবনা আছে ।"
+
+  utter_Malaria:
+  - text: "আপনার ম্যালেরিয়াতে আক্রান্ত হওয়ার সম্ভাবনা আছে।"
+
+  utter_Hepatitis_B:
+  - text: "আপনার হেপাটাইটিসে আক্রান্ত হওয়ার সম্ভাবনা আছে।"
+
+  utter_Dengue:
+  - text: "আপনার ডেঙ্গু জ্বরে আক্রান্ত হওয়ার সম্ভাবনা আছে।"
+
+  utter_Tuberculosis:
+  - text: "আপনার যক্ষ্মায় আক্রান্ত হওয়ার সম্ভাবনা আছে।"
+
+  utter_Result:
+  - text: "ফলাফল"
+
+  utter_More:
+  - text: "আপনার কি আরও সমস্যা আছে?"
+
+  utter_wellbeing:
+  - text: "আমি একটি বট, আমি সব সময় ভালো থাকি। জিঞ্জাসা করার জন্য আপনাকে ধন্যবাদ"
+
+  utter_whatbotdoingnow:
+  - text: "বর্তমানে আমি আপনার সাথে কথা বলছি"
+  - text: "ছুটি কাটাচ্ছি"
+
+  utter_please_rephrase:
+  - text: "আপনার কথাটা সঠিক বুঝতে পারলাম না, আপনি কি একটু ভিন্নভাবে বলবেন?"
+
+  utter_meaninglessexpressions:
+  - text: "হুমম"
+
+  utter_location:
+  - text: "কম্পিউটারের মেমরি আর লজিক বোর্ডের মধ্যে।"
+
+  utter_ask_city:
+  - text: "দয়া করে আপনার শহরটির নাম লিখুন: 1. আগরতলা, 2. কলকাতা, 3. শিলচর "
+
+
+  utter_health_info:
+  - text: "আপনি কি আপনার স্বাস্থ্য সম্পর্কে জানতে আগ্রহী?"
+
+  utter_ask_weight:
+  - text: "আপনার ওজন কত"
+  utter_ask_height:
+  - text: "আপনার উচ্চতা কত"
+  utter_ask_sex:
+  - text: "পুরুষ না স্ত্রী (m/f)"
+  utter_ask_age:
+  - text: "আপনার বয়স কত"
+  utter_ask_waist:
+  - text: "কোমরের মাপ"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

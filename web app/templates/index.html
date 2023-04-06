@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>ChatBot</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	
+</head>
+<body>
+
+	<!-- CHAT BAR BLOCK -->
+    <div id ="main">
+    <div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">Chat with us!
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <!-- Messages -->
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+
+                        <!-- User input box -->
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="write a message">
+                                <p></p>
+                            </div>
+
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: brown;" class="fa fa-fw fa-keyboard-o"
+                                    ></i>
+                                <i id="chat-icon" style="color: crimson;" class="fa fa-fw fa-pencil"
+                                    onclick="server.translate()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="server.send()"></i>
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-tasks"
+                                    onclick="server.test()"></i>
+                            </div>
+                        </div>
+
+                        <div id="chat-bar-bottom">
+
+                            <p></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    </div>
+    
+<span id="data">a</span>
+</body>
+
+
+<script>
+
+function addMsg(chkStr){
+    console.log(chkStr)
+    if(chkStr.includes(":")){
+        let list=chkStr.split(":");
+        msg=list[1].trim();
+    if (chkStr.includes("user")){
+    let p= document.createElement("p");
+    let span= document.createElement("span");
+    p.classList.add("userText");
+    span.innerHTML=msg;
+    p.appendChild(span)
+
+    const chatbox= document.querySelector('#chatbox');
+    chatbox.append(p);
+    //$("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);  
+
+    }else{
+    let p= document.createElement("p");
+    let span= document.createElement("span");
+    p.classList.add("botText");
+    span.innerHTML=msg;
+    p.appendChild(span)
+
+    const chatbox= document.querySelector('#chatbox');
+    chatbox.append(p);
+    //$("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);    
+    }
+
+    }
+    else{
+        this.innerHTML="";
+    }
+}
+
+
+
+const data=document.querySelector('#data');
+data.addEventListener('DOMNodeInserted', function() {
+
+    //alert('span text changed to: ' + this.innerHTML);
+
+    let chkStr= this.innerHTML
+    console.log(chkStr)
+    if(chkStr.includes(":")){
+        let list=chkStr.split(":");
+        msg=list[1].trim();
+    if (chkStr.includes("user")){
+    let p= document.createElement("p");
+    let span= document.createElement("span");
+    p.classList.add("userText");
+    span.innerHTML=msg;
+    p.appendChild(span)
+
+    const chatbox= document.querySelector('#chatbox');
+    chatbox.append(p);
+    //$("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);  
+
+    }else{
+    let p= document.createElement("p");
+    let span= document.createElement("span");
+    p.classList.add("botText");
+    span.innerHTML=msg;
+    p.appendChild(span)
+
+    const chatbox= document.querySelector('#chatbox');
+    chatbox.append(p);
+    //$("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);    
+    }
+
+    }
+    else{
+        this.innerHTML="";
+    }
+
+});
+
+const Keyboard = {
+    elements: {
+        main: null,
+        keysContainer: null,
+        keys: []
+    },
+
+    eventHandlers: {
+        oninput: null,
+        onclose: null
+    },
+
+    properties: {
+        value: "",
+        capsLock: false
+    },
+
+    init() {
+        // Create main elements
+        this.elements.main = document.createElement("div");
+        this.elements.keysContainer = document.createElement("div");
+        // Setup main elements
+        this.elements.main.classList.add("keyboard", "keyboard--hidden");
+
+        this.elements.keysContainer.classList.add("keyboard__keys");
+        this.elements.keysContainer.appendChild(this._createKeys());
+
+        this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");
+
+        // Add to DOM
+        this.elements.main.appendChild(this.elements.keysContainer);
+        document.body.appendChild(this.elements.main);
+
+        // Automatically use keyboard for elements with .use-keyboard-input
+        document.querySelectorAll(".fa-keyboard-o").forEach(element => {
+            element.addEventListener("click", () => {
+                console.log("click");
+                this.open(element.value, currentValue => {
+                    element.value = currentValue;
+                });
+            });
+        });
+    },
+
+    _createKeys() {
+        const fragment = document.createDocumentFragment();
+        /*const keyLayout = [
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "backspace",
+            "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+            "caps", "a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
+            "done", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?",
+            "space"
+        ];*/
+        const keyLayout= ['অ', 'আ', 'ই', 'ঈ', 'উ', 'ঊ', 'এ', 'ঐ', 'ও', 'ঔ', 'ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ', 'ছ', 'জ', 'ঝ', 'ঞ', 'ট',
+         'ঠ', 'ড', 'ঢ', 'ণ', 'ত', 'থ', 'দ', 'ধ', 'ন', 'প', 
+         'ফ', 'ব', 'ভ', 'ম', 'য', 'র', 'ল', 'শ', 'ষ', 
+         'স', 'হ', 'য়', 'ড়', 'ঢ়',
+         'া','ি','ী','◌ু','◌ূ','ে','ৈ','ো','ৌ',
+         'backspace','space','done']
+
+
+        // Creates HTML for an icon
+        const createIconHTML = (icon_name) => {
+            return `<i class="material-icons">${icon_name}</i>`;
+        };
+
+        keyLayout.forEach(key => {
+            const keyElement = document.createElement("button");
+            const insertLineBreak = ["backspace", "p", "enter", "?"].indexOf(key) !== -1;
+
+            // Add attributes/classes
+            keyElement.setAttribute("type", "button");
+            keyElement.classList.add("keyboard__key");
+
+            switch (key) {
+                case "backspace":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("<");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "caps":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+                    keyElement.innerHTML = createIconHTML("keyboard_capslock");
+
+                    keyElement.addEventListener("click", () => {
+                        this._toggleCapsLock();
+                        keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+                    });
+
+                    break;
+
+                case "enter":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("keyboard_return");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += "\n";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "space":
+                    keyElement.classList.add("keyboard__key--wide");
+                    keyElement.innerHTML = createIconHTML("__");
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += " ";
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+
+                case "done":
+                    keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
+                    keyElement.innerHTML = createIconHTML("done");
+
+                    keyElement.addEventListener("click", () => {
+                        this.close();
+                        this._triggerEvent("onclose");
+                    });
+
+                    break;
+
+                default:
+                    keyElement.textContent = key.toLowerCase();
+
+                    keyElement.addEventListener("click", () => {
+                        this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+                        this._triggerEvent("oninput");
+                    });
+
+                    break;
+            }
+
+            fragment.appendChild(keyElement);
+
+            if (insertLineBreak) {
+                fragment.appendChild(document.createElement("br"));
+            }
+        });
+
+        return fragment;
+    },
+
+    _triggerEvent(handlerName) {
+        if (typeof this.eventHandlers[handlerName] == "function") {
+            this.eventHandlers[handlerName](this.properties.value);
+            const element = document.querySelector("#textInput");
+            element.value=this.properties.value
+        }
+    },
+
+    _toggleCapsLock() {
+        this.properties.capsLock = !this.properties.capsLock;
+
+        for (const key of this.elements.keys) {
+            if (key.childElementCount === 0) {
+                key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+            }
+        }
+    },
+
+    open(initialValue, oninput, onclose) {
+        this.properties.value = initialValue || "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.remove("keyboard--hidden");
+        const element = document.querySelector("#main");
+        element.classList.add("half");
+        console.log("open");
+
+    },
+
+    close() {
+        this.properties.value = "";
+        this.eventHandlers.oninput = oninput;
+        this.eventHandlers.onclose = onclose;
+        this.elements.main.classList.add("keyboard--hidden");
+        const element = document.querySelector("#main");
+
+        element.classList.remove("half");
+        console.log("close");
+    }
+};
+
+window.addEventListener("DOMContentLoaded", function () {
+    Keyboard.init();
+});
+
+
+
+function checking_data(){
+    data= document.getElementById("data")
+    let chkStr= data.innerHTML
+    console.log(chkStr)
+    if(chkStr.contains(":")){
+        let list=chkStr.split(":");
+        msg=list[1].trim();
+    if (chkStr.contains("user")){
+    let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);  
+
+    }
+    }
+    else{
+        data.innerHTML="";
+    }
+
+
+}
+
+
+
+
+
+
+    // Collapsible
+var coll = document.getElementsByClassName("collapsible");
+
+for (let i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+
+        var content = this.nextElementSibling;
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+
+    });
+}
+
+function getTime() {
+    let today = new Date();
+    hours = today.getHours();
+    minutes = today.getMinutes();
+
+    if (hours < 10) {
+        hours = "0" + hours;
+    }
+
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+
+    let time = hours + ":" + minutes;
+    return time;
+}
+
+// Gets the first message
+function firstBotMessage() {
+    let firstMessage = "আপনাকে এখানে স্বাগতম"
+    document.getElementById("botStarterMessage").innerHTML = '<p class="botText"><span>' + firstMessage + '</span></p>';
+
+    document.getElementById("userInput").scrollIntoView(false);
+}
+
+firstBotMessage();
+
+// Retrieves the response
+function getHardResponse(userText) {
+    let botResponse = getBotResponse(userText);
+    let botHtml = '<p class="botText"><span>' + botResponse + '</span></p>';
+    $("#chatbox").append(botHtml);
+
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+}
+
+//Gets the text text from the input box and processes it
+function getResponse() {
+    let userText = $("#textInput").val();
+
+    if (userText == "") {
+        //userText = "I love Code Palace!";
+    }
+
+    let userHtml = '<p class="userText"><span>' + userText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    setTimeout(() => {
+        getHardResponse(userText);
+    }, 1000)
+
+}
+
+// Handles sending text via button clicks
+function buttonSendText(sampleText) {
+    let userHtml = '<p class="userText"><span>' + sampleText + '</span></p>';
+
+    $("#textInput").val("");
+    $("#chatbox").append(userHtml);
+    document.getElementById("chat-bar-bottom").scrollIntoView(true);
+
+    //Uncomment this if you want the bot to respond to this buttonSendText event
+    // setTimeout(() => {
+    //     getHardResponse(sampleText);
+    // }, 1000)
+}
+
+function sendButton() {
+    getResponse();
+}
+
+function heartButton() {
+    buttonSendText("Heart clicked!")
+}
+
+// Press enter to send a message
+$("#textInput").keypress(function (e) {
+    if (e.which == 13) {
+        getResponse();
+    }
+});
+
+
+
+function getBotResponse(input) {
+	
+	
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>
